@@ -1,0 +1,5 @@
+SELECT * FROM discount.products 
+LEFT JOIN (SELECT REVIEWS.products_ID, count(*) AMOUNT_REVIEWS FROM REVIEWS
+GROUP BY REVIEWS.products_ID) AS REWIEWS_AMOUNTS
+ON products.products_ID = REWIEWS_AMOUNTS.products_ID
+where AMOUNT_REVIEWS >= 3;

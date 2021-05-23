@@ -1,0 +1,1 @@
+SELECT * FROM discount.products WHERE length(DESCRIPTION) > 50;

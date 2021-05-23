@@ -1,0 +1,7 @@
+SELECT  USERNAME 
+FROM (SELECT USERNAME, count(USER.USER_ID) OFFER_AMOUNT FROM discount.products 
+LEFT JOIN discount.USER 
+ON products.USER_ID = USER.USER_ID
+WHERE DATE(products.CREATED_AT) >= curdate() - 10 AND ISVENDOR = TRUE
+GROUP BY products.USER_ID) AS products_FOR_USER
+WHERE products_AMOUNT > 3
