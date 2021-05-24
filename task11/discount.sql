@@ -1,0 +1,101 @@
+  
+CREATE DATABASE IF NOT EXISTS discount;
+USE discount;
+
+DROP TABLE IF EXISTS REVIEWS;
+DROP TABLE IF EXISTS HASHTAGS;
+DROP TABLE IF EXISTS OFFER;
+DROP TABLE IF EXISTS USER;
+
+CREATE TABLE USER (
+	USER_ID int NOT NULL UNIQUE AUTO_INCREMENT,
+	USERNAME varchar(30) NOT NULL,
+    IS_VENDOR bool,
+    PASSWORD varchar(30) NOT NULL,
+    PRIMARY KEY (USER_ID)
+);
+
+LOCK TABLES USER WRITE;
+INSERT INTO USER (USERNAME, IS_VENDOR, PASSWORD) VALUES ('Alex',TRUE,'m12ww211eefweefghrthrthrow');
+INSERT INTO USER (USERNAME, IS_VENDOR, PASSWORD) VALUES ('Axel',FALSE,'hjw54yrtyh35h5k532');
+INSERT INTO USER (USERNAME, IS_VENDOR, PASSWORD) VALUES ('Brow',TRUE,'hasdrthr1thshkbw780');
+INSERT INTO USER (USERNAME, IS_VENDOR, PASSWORD) VALUES ('Polom',FALSE,'qdqwqwdqwbbjlsw7');
+INSERT INTO USER (USERNAME, IS_VENDOR, PASSWORD) VALUES ('Andrew',TRUE,'jhsbkw68!nd');
+INSERT INTO USER (USERNAME, IS_VENDOR, PASSWORD) VALUES ('Vlad',FALSE,'dasdfdsasdablqbcb793');
+INSERT INTO USER (USERNAME, IS_VENDOR, PASSWORD) VALUES ('Kortney',FALSE,'dascxndclsb3682');
+INSERT INTO USER (USERNAME, IS_VENDOR, PASSWORD) VALUES ('Fide',TRUE,'213213wehedblws8302!');
+INSERT INTO USER (USERNAME, IS_VENDOR, PASSWORD) VALUES ('Oleg',FALSE,'ddcfshavdhk7389&');
+INSERT INTO USER (USERNAME, IS_VENDOR, PASSWORD) VALUES ('Leon',TRUE,'7qwd3scdcs80gbkv822');
+UNLOCK TABLES;
+
+CREATE TABLE OFFER (
+	OFFER_ID int NOT NULL UNIQUE AUTO_INCREMENT,
+    USER_ID int NOT NULL,
+	OFFER_NAME varchar(100) NOT NULL,
+    DESCRIPTION varchar(250) NOT NULL,
+    LINK varchar(250),
+    PHOTO_LINK text,
+    CREATED_AT datetime NOT NULL,
+    VALID_UNTIL datetime,
+    DISCOUNT int NOT NULL,
+    FOREIGN KEY (USER_ID) REFERENCES USER (USER_ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+LOCK TABLES OFFER WRITE;
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (1, 'VK', 'ВКонтакте — мессенджер, музыка и видео', 'https://play.google.com/store/apps/details?id=com.vkontakte.android', 'https://play-lh.googleusercontent.com/LmnJkZ_97f5PHg-BE_AkntaS1v3_7MmaUO_m6oWpfKxVOriOsMPf79S52KInIJ0E_S8=s180-rw', curdate(), '2021-04-01 00:00:00', 23);
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (3, 'Relax with Spa River', 'Relax and unwind from the daily hustle and bustle in SPA River.', 'http://spariver.by/', 'http://spariviera.by/assets/images/86.jpg', '2021-03-01 10:17:21', '2021-04-10 00:00:00', 5);
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (5, 'Sushi day', 'Delicious sushi for the whole family.', 'https://sushiinhouse.by/', 'https://www.slivki.by/znijki-media/w522_322/default/1009921/1590576699_ikebana-set-minsk-sushihouse-kar-1.jpg', '2021-03-05 15:16:39', '2021-05-22 00:00:00', 17);
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (1, 'VK', 'ВКонтакте — мессенджер, музыка и видео', 'https://play.google.com/store/apps/details?id=com.vkontakte.android', 'https://play-lh.googleusercontent.com/LmnJkZ_97f5PHg-BE_AkntaS1v3_7MmaUO_m6oWpfKxVOriOsMPf79S52KInIJ0E_S8=s180-rw', curdate(), '2022-05-17 00:00:00', 30);
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (3, 'Relax with Spa River', 'Relax and unwind from the daily hustle and bustle in SPA River.', 'http://spariver.by/', 'http://spariviera.by/assets/images/86.jpg', '2019-03-05 10:17:21', '2021-03-01 00:00:00', 3);
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (5, 'Sushi day', 'Delicious sushi for the whole family.', 'https://sushiinhouse.by/', 'https://www.slivki.by/znijki-media/w522_322/default/1009921/1590576699_ikebana-set-minsk-sushihouse-kar-1.jpg', '2021-07-19 15:16:39', '2023-09-13 00:00:00', 20);
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (1, 'VK', 'ВКонтакте — мессенджер, музыка и видео', 'https://play.google.com/store/apps/details?id=com.vkontakte.android', 'https://play-lh.googleusercontent.com/LmnJkZ_97f5PHg-BE_AkntaS1v3_7MmaUO_m6oWpfKxVOriOsMPf79S52KInIJ0E_S8=s180-rw', curdate(), '2022-02-18 00:00:00', 14);
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (3, 'Relax with Spa River', 'Relax and unwind from the daily hustle and bustle in SPA River.', 'http://spariver.by/', 'http://spariviera.by/assets/images/86.jpg', '2020-12-18 18:17:25', '2022-05-10 00:00:00', 3);
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (5, 'Sushi day', 'Delicious sushi for the whole family.', 'https://sushiinhouse.by/', 'https://www.slivki.by/znijki-media/w522_322/default/1009921/1590576699_ikebana-set-minsk-sushihouse-kar-1.jpg', curdate(), '2022-10-28 00:00:00', 32);
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (1, 'VK', 'ВКонтакте — мессенджер, музыка и видео', 'https://play.google.com/store/apps/details?id=com.vkontakte.android', 'https://play-lh.googleusercontent.com/LmnJkZ_97f5PHg-BE_AkntaS1v3_7MmaUO_m6oWpfKxVOriOsMPf79S52KInIJ0E_S8=s180-rw', curdate(), '2023-02-14 00:00:00', 10);
+INSERT INTO OFFER (USER_ID, OFFER_NAME, DESCRIPTION, LINK, PHOTO_LINK, CREATED_AT, VALID_UNTIL, DISCOUNT) VALUES (1, 'VK', 'ВКонтакте — мессенджер, музыка и видео', 'https://play.google.com/store/apps/details?id=com.vkontakte.android', 'https://play-lh.googleusercontent.com/LmnJkZ_97f5PHg-BE_AkntaS1v3_7MmaUO_m6oWpfKxVOriOsMPf79S52KInIJ0E_S8=s180-rw', curdate(),  '2022-01-01 00:00:00', 7);
+
+UNLOCK TABLES;
+
+CREATE TABLE HASHTAGS (
+	OFFER_ID int NOT NULL,
+    HASHTAG varchar(20),
+    FOREIGN KEY (OFFER_ID) REFERENCES OFFER (OFFER_ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+LOCK TABLES HASHTAGS WRITE;
+INSERT INTO HASHTAGS (OFFER_ID, HASHTAG) VALUES (1,'social');
+INSERT INTO HASHTAGS (OFFER_ID, HASHTAG) VALUES (1,'social');
+INSERT INTO HASHTAGS (OFFER_ID, HASHTAG) VALUES (1,'app');
+INSERT INTO HASHTAGS (OFFER_ID, HASHTAG) VALUES (1,'minsk');
+INSERT INTO HASHTAGS (OFFER_ID, HASHTAG) VALUES (2,'relax');
+INSERT INTO HASHTAGS (OFFER_ID, HASHTAG) VALUES (2,'sauna');
+INSERT INTO HASHTAGS (OFFER_ID, HASHTAG) VALUES (2,'massage');
+INSERT INTO HASHTAGS (OFFER_ID, HASHTAG) VALUES (3,'food');
+INSERT INTO HASHTAGS (OFFER_ID, HASHTAG) VALUES (3,'sushi');
+INSERT INTO HASHTAGS (OFFER_ID, HASHTAG) VALUES (3,'minsk');
+
+UNLOCK TABLES;
+
+CREATE TABLE REVIEWS (
+	OFFER_ID int NOT NULL,
+	USERNAME varchar(30) NOT NULL,
+    REVIEW text,
+    RATING int NOT NULL,
+    REVIEW_DATE datetime NOT NULL,
+    FOREIGN KEY (OFFER_ID) REFERENCES OFFER (OFFER_ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+LOCK TABLES REVIEWS WRITE;
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (1,'Alex', 'The best gym in Minsk!', 5, '2021-02-17 12:51:32');
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (1,'Alex', 'Like!', 5, curdate());
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (3, 'Kortney', 'Dislike', 2, '2020-10-02 01:29:17');
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (2, 'Brow', 'Best spa', 5, '2021-04-15 15:34:10');
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (1,'Axel', 'So-so', 3, '2021-05-09 10:28:21');
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (1,'Leon', 'Not bad', 4, '2021-05-09 21:48:52');
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (3, 'Alex', 'Yummy', 4, '2021-04-22 10:38:19');
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (2, 'Leon', 'Like!', 5, '2021-05-09 19:17:05');
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (3, 'Oleg', 'Do not order it', 1, '2019-05-18 23:54:03');
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (2, 'Polom', 'Enjoy your weekends', 5, '2020-11-23 12:51:47');
+INSERT INTO REVIEWS (OFFER_ID, USERNAME, REVIEW, RATING, REVIEW_DATE) VALUES (2, 'Vlad', 'My wife likes it', 4, '2021-03-02 19:41:48');
+
+UNLOCK TABLES;
